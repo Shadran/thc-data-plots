@@ -38,7 +38,7 @@ async function getData() {
             promises.push(fetch(toDownload[char][mode].url)
                             .then(r => r.text())
                             .then(t => {
-                                const splitData = t.split("\r\n");
+                                const splitData = t.split(/\r*\n/);
                                 return {
                                     char: char,
                                     mode: mode,
