@@ -65,16 +65,9 @@ getData().then(data => {
     const maxDamage = Math.max(...Object.values(data).flatMap(d => d.flatMap(x => x.data)).map(x => x.damage));
     const maxPercentage = Math.max(...Object.values(data).flatMap(d => d.flatMap(x => x.data)).map(x => x.percentage));
 
-    let labels = [];
-
-    for(var i = 0; i < maxDamage + 10; i = i + 5){
-        labels.push(i);
-    }
-
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
             datasets: Object.values(data)
                 .flatMap(x => x)
                 .map(x => {
@@ -89,16 +82,10 @@ getData().then(data => {
             scales: {
             x: {
                 type: 'linear',
-                ticks: {
-                    callback: function(value, index, values) {
-                        return labels[index];
-                    },
-                }
             },
             y: {
                 min: 0,
                 beginAtZero: true,
-                max: maxPercentage + 0.1,
             }
             },
             plugins: {
